@@ -24,7 +24,7 @@ contract OrderBeef{
         string time;
     }
     
-    mapping(address => Order[]) private order;
+    mapping(address => Order[]) private orders;
     mapping(address => uint256) private balance;
     mapping(address => uint256) private star;
     event _order(address indexed _account,string indexed _menu, uint256 indexed _price);
@@ -41,14 +41,14 @@ contract OrderBeef{
         balance[_from] = balance[_from].sub(_price.mul(_amount));
         Beef memory _beefObj = Beef(_menu, _level, _price.mul(_amount));
         Order memory _orderObj = Order(_beefObj, _amount, _moreDetails, _time);
-        order[_from].push(_orderObj);
+        orders[_from].push(_orderObj);
         star[_from] = star[_from].add(1);
         emit _order(_from, _menu, _price);
         return true;
     }
     
     function getOrder(address _from)public view returns(Order[] memory){
-        return order[_from];
+        return orders[_from];
     }
     
     function getBalance(address _from)public view returns(uint256){

@@ -8,6 +8,7 @@ import { getStar } from "./services/getStar";
 
 const initialBalance = 10000000;
 const initialStar = 0;
+
 describe("Deployment", () => {
 
   it("Owner balance should be same with initialBalance", async () => {
@@ -95,7 +96,7 @@ describe("Transaction", () => {
     await expect(orderBeef.connect(addr1).transfer(addr1.address, owner.address, 1)).to.be.revertedWith('your balance less than amount !');
   });
 
-  it("Should order faild cuz balance not enough", async () => {
+  it("Should orders faild cuz balance not enough", async () => {
     const { orderBeef } = await deploySmartContract();
     await orderBeef.deployed();
     const [_, addr1] = await ethers.getSigners();
