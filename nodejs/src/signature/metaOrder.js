@@ -4,11 +4,11 @@ const utils = ethers.utils;
 let mnemonic =
     "blur depend exhibit cliff film govern toward type embrace fine latin hotel"; //74 length
 
-let wallet = ethers.Wallet.fromMnemonic(mnemonic); //create account
+let wallet = ethers.Wallet.fromMnemonic(mnemonic);
 console.log("Wallet address:", wallet.address);
 console.log("Private key:", wallet.privateKey);
 
-let _from = wallet.address; //who address you want to transfer
+let _from = wallet.address;
 let _menu = "A5";
 let _level = "Rare";
 let _price = 8000;
