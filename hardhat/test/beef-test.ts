@@ -33,7 +33,7 @@ describe("Deployment", () => {
 
 describe("Transaction", () => {
 
-  it("Should transfer tokens between accounts", async () => {
+  it("Should transfer balance between accounts", async () => {
     const { orderBeef } = await deploySmartContract();
     await orderBeef.deployed();
 
@@ -67,7 +67,7 @@ describe("Transaction", () => {
     );
     await setOrderTx.wait();
 
-    let response: any = await orderBeef.getOrder(owner.address).then((result: any) => result);
+    let response: any = await orderBeef.getOrders(owner.address).then((result: any) => result);
     response = [...response[0].beef, response[0].amont, response[0].moreDetails, response[0].time];
     let ownerOrder: (string | number)[][] = response.map((data: (string | number)[], index: number) => {
       if (index === 2 || index === 3) {

@@ -1,7 +1,7 @@
 import { task } from "hardhat/config";
-import { Signer } from "ethers";
-
+import * as dotenv from "dotenv";
 import "@nomiclabs/hardhat-waffle";
+dotenv.config();
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
 task("accounts", "Prints the list of accounts", async (_, hre: any) => {
@@ -22,9 +22,9 @@ export default {
     },
     hardhat: {
     },
-    // bitkub: {
-    //   url: "https://rpc-testnet.bitkubchain.io",
-    //   accounts: [process.env.PRIVATE_KEY]
-    // }
+    bitkub: {
+      url: "https://rpc-testnet.bitkubchain.io",
+      accounts: [process.env.PRIVATE_KEY]
+    }
   },
 };
