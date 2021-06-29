@@ -20,11 +20,18 @@ const typeDefs = gql`
     time: String
   }
 
+  type Account {
+    publicKey: String
+    privateKey: String
+  }
+
   type Transfer {
     from: String
     to: String
     amount: Int
   }
+
+
   
   type Query {
     showBooks: [Book]
@@ -35,7 +42,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    createAccount: String
+    createAccount: Account
     createTransfer(from: String, to:String, amount:Int): Boolean
     createOrder(from: String, menu: String, level: String, price: Int, amount: Int, moreDetail: String, time: String): Boolean
   }

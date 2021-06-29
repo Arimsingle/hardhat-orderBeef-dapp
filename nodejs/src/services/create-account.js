@@ -1,5 +1,8 @@
 const ethers = require("ethers");
-module.exports = createWallet = () => {
+let { accountController } = require("../shared/accounts");
+const createWallet = async () => {
     let wallet = ethers.Wallet.createRandom();
-    return { wallet: wallet.address };
+    await accountController(wallet.address, wallet.privateKey);
+    return { publicKey: wallet.address, privateKey: wallet.privateKey };
 }
+module.exports = { createWallet };

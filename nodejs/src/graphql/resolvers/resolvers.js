@@ -1,4 +1,4 @@
-const createRandom = require("../../services/create-account");
+const { createWallet } = require("../../services/create-account");
 const createTransfer = require("../../services/create-transfer");
 const Balance = require("../../services/show-balance");
 const books = [
@@ -11,8 +11,8 @@ const books = [
         author: 'Paul Auster',
     },
 ];
-
 const resolvers = {
+
     Query: {
         showBooks: () => {
             return books
@@ -29,9 +29,8 @@ const resolvers = {
     Mutation: {
         createAccount: async () => {
             try {
-                const { wallet } = createRandom();
-                console.log(wallet);
-                return wallet
+                const { publicKey, privateKey } = await createWallet();
+                return { publicKey, privateKey }
             } catch (error) {
                 console.log(error);
             }
