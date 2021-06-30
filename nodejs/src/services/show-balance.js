@@ -1,5 +1,6 @@
 const { contract } = require("../shared/contract/contract");
-module.exports = Balance = async (from) => {
+const Balance = async (from) => {
     let balance = await contract.getBalance(from);
-    return { balance: +balance }
+    return { balance: +balance };
 }
+module.exports = { Balance };

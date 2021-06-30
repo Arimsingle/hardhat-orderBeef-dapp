@@ -9,16 +9,17 @@ const provider = new ethers.providers.JsonRpcProvider(`http://${process.env.RPC_
 const accountController = async (publicKey, privateKey) => {
     if (publicKey && privateKey) {
         const walletProvider = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
-        tx = {
+        let tx = {
             from: process.env.ACCOUNT,
             to: publicKey,
             value: ethers.utils.parseEther("1.0")
         }
         await walletProvider.signTransaction(tx)
         const signer = walletProvider.connect(provider);
-        await signer.sendTransaction(tx).then(res => console.log(res))
+        await signer.sendTransaction(tx)
         accounts = [...accounts, { publicKey, privateKey }]
     }
+    console.log(accounts);
     return { accounts };
 }
 

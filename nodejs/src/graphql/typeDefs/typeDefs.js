@@ -16,7 +16,7 @@ const typeDefs = gql`
   type Order {
     beef: Beef
     amount: Int
-    moreDetail: String
+    moreDetails: String
     time: String
   }
 
@@ -31,20 +31,27 @@ const typeDefs = gql`
     amount: Int
   }
 
+  type Balance {
+    balance: Int
+  }
+  type Star {
+    star: Int
+  }
+
 
   
   type Query {
     showBooks: [Book]
-    showOrders: [Order]
-    showStar(from: String): Int
-    showBalance(from: String): Int
+    showOrders(from: String): [Order]
+    showStar(from: String): Star
+    showBalance(from: String): Balance
     hashMessage(from: String, menu: String, level: String, price: Int, amount: Int, moreDetail: String, time: String, nonce: Int): String
   }
 
   type Mutation {
     createAccount: Account
-    createTransfer(from: String, to:String, amount:Int): Boolean
-    createOrder(from: String, menu: String, level: String, price: Int, amount: Int, moreDetail: String, time: String): Boolean
+    createTransfer(from: String, to:String, amount:Int): Transfer
+    createOrder(from: String, menu: String, level: String, price: Int, amount: Int, moreDetails: String, time: String): Order
   }
 `;
 
