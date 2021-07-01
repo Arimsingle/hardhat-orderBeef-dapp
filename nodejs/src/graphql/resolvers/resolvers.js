@@ -4,22 +4,12 @@ const { createTransfer } = require("../../services/create-transfer");
 const { Balance } = require("../../services/show-balance");
 const { Star } = require("../../services/show-star");
 const { Orders } = require("../../services/show-orders");
-const books = [
-    {
-        title: 'The Awakening',
-        author: 'Kate Chopin',
-    },
-    {
-        title: 'City of Glass',
-        author: 'Paul Auster',
-    },
-];
+const { createMetaOrder } = require("../../services/create-MetaOrder");
+const { RecoverSigner } = require("../../services/show-recoverSigner");
+
 const resolvers = {
 
     Query: {
-        showBooks: () => {
-            return books
-        },
         showBalance: async (_, req) => {
             const { balance } = await Balance(req.from);
             return { balance };
@@ -31,6 +21,10 @@ const resolvers = {
         showOrders: async (_, req) => {
             const { orders } = await Orders(req.from);
             return orders;
+        },
+        showRecoverSigner: async (_, req) => {
+            const { from } = await RecoverSigner(req.hashMessage, req.signature);
+            return { from };
         }
 
 
@@ -76,6 +70,53 @@ const resolvers = {
                     req.time
                 );
                 return {
+                    beef: {
+                        menu,
+                        level,
+                        price
+                    },
+                    from,
+                    amount,
+                    moreDetails,
+                    time
+
+                };
+
+            } catch (error) {
+                console.log(error);
+
+            }
+        },
+        createMetaOrder: async (_, req) => {
+            try {
+                const {
+                    signature,
+                    hashMessage,
+                    nonce,
+                    beef: {
+                        menu,
+                        level,
+                        price
+                    },
+                    from,
+                    amount,
+                    moreDetails,
+                    time
+
+                } = await createMetaOrder(
+                    req.from,
+                    req.menu,
+                    req.level,
+                    req.price,
+                    req.amount,
+                    req.moreDetails,
+                    req.time,
+                    req.nonce
+                );
+                return {
+                    signature,
+                    hashMessage,
+                    nonce,
                     beef: {
                         menu,
                         level,

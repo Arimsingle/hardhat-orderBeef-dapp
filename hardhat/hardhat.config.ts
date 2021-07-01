@@ -4,6 +4,7 @@ import "@nomiclabs/hardhat-waffle";
 dotenv.config();
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
+
 task("accounts", "Prints the list of accounts", async (_, hre: any) => {
   const accounts = await hre.ethers.getSigners();
 
@@ -18,7 +19,7 @@ export default {
   },
   networks: {
     localhost: {
-      url: "http://127.0.0.1:8545"
+      url: `http://${process.env.RPC_HOST}:${process.env.RPC_PORT}`
     },
     hardhat: {
     },

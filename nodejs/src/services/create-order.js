@@ -10,7 +10,6 @@ const createOrder = async (
     moreDetails,
     time) => {
     const { accounts } = await accountController();
-    console.log(accounts);
     if (accounts) {
         let account = accounts.find((account) => account.publicKey === from);
         if (account) {

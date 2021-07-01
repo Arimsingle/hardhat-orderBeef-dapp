@@ -12,9 +12,9 @@ const createTransfer = async (from, to, amount) => {
             await transferTx.wait();
             return { from, to, amount };
         }
-        else {
-            console.log("have no account");
-        }
+    }
+    else {
+        console.log("have no account");
     }
     return { from, to, amount };
 }
